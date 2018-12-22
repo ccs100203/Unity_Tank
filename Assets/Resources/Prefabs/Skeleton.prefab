@@ -1341,7 +1341,7 @@ MonoBehaviour:
   HealthBar: {fileID: 114488724180017004}
   FillImage: {fileID: 114474439615252464}
   FullHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  ZeroHealthColor: {r: 1, g: 0.83823526, b: 0, a: 1}
+  ZeroHealthColor: {r: 1, g: 0.88235295, b: 0, a: 1}
 --- !u!114 &114114707940273044
 MonoBehaviour:
   m_ObjectHideFlags: 1

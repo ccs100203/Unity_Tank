@@ -33,17 +33,17 @@ public class MonsterMove : MonoBehaviour
     {
         targetPos = target.transform.position;
         transform.LookAt(targetPos);
-        if ((targetPos - transform.position).magnitude <= 4)
+        move();
+        if ((targetPos - transform.position).magnitude <= 13)
         {
             animator.SetBool("NearTarget", true);
             return;
         }
-        move();
-        
+        animator.SetBool("NearTarget", false);
+
     }
     void move()
     {
-        animator.SetBool("NearTarget", false);
         transform.position += transform.forward * Time.deltaTime * speed;
     }
 }

@@ -29,12 +29,18 @@ public class ShellExplosion : MonoBehaviour
 
             target.AddExplosionForce(ExplosionForce, transform.position, ExplosionRadius);
 
-            TankHealth health = target.GetComponent<TankHealth>();
-            if (!health)
-                continue;
-
-            float damage = CalculateDamage(target.position);
-            health.TakeDamage(damage);
+            TankHealth healthPlayer = target.GetComponent<TankHealth>();
+            MonsterHealth healthMonster = target.GetComponent<MonsterHealth>();
+            if (healthPlayer)
+            {
+                float damage = CalculateDamage(target.position);
+                healthPlayer.TakeDamage(damage);
+            }
+            if (healthMonster)
+            {
+                float damage = CalculateDamage(target.position);
+                healthMonster.TakeDamage(damage);
+            }
         }
         ExplosionParticles.transform.parent = null;
         ExplosionParticles.Play();

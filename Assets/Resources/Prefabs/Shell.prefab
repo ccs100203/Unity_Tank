@@ -132,7 +132,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1497823074975344}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.06319443, y: 0.13003294, z: 1.6180441}
+  m_LocalPosition: {x: 0.06319443, y: 0.13003294, z: -10.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4497218744269944}
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TankMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1536
   ExplosionParticles: {fileID: 198540909044671710}
   ExplosionAudio: {fileID: 82507675367042916}
   MaxDamage: 100

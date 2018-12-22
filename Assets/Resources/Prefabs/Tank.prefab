@@ -1009,8 +1009,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerNums: 1
-  Speed: 12
-  TurnSpeed: 180
+  Speed: 10
+  TurnSpeed: 140
   MovementAudio: {fileID: 82174089342443376}
   EngineIdling: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
   EngineDriving: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}

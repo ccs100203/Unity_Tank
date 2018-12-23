@@ -66,4 +66,22 @@ public class TankHealth : MonoBehaviour
         ExplosionAudio.Play();
         gameObject.SetActive(false);
     }
+    void OnCollisionEnter(Collision c)
+    {
+        Debug.Log(c.transform.name);
+        if (c.transform.name == "Skeleton(Clone)")
+        {
+            TakeDamage(3f);
+            Rigidbody rb1 = GetComponent<Rigidbody>();
+            Rigidbody rb2 = c.gameObject.GetComponent<Rigidbody>();
+            rb1.AddForce(-500 * transform.forward);
+            rb2.AddForce(500 * transform.forward);
+        }
+        if (c.transform.name == "Boss(Clone)")
+        {
+            TakeDamage(10f);
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.AddForce(1000 * c.transform.forward);
+        }
+    }
 }

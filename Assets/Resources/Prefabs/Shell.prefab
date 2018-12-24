@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4733096431914092}
   - component: {fileID: 198493452096873916}
   - component: {fileID: 199628609511963864}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Burst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 54376737009484434}
   - component: {fileID: 108277020666882730}
   - component: {fileID: 114078471814511544}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 4159659562834230}
   - component: {fileID: 198477064503987284}
   - component: {fileID: 199519586214335470}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 198540909044671710}
   - component: {fileID: 199892931281012034}
   - component: {fileID: 82507675367042916}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ShellExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}

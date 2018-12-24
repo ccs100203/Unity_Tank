@@ -11,14 +11,16 @@ public class GameManager : MonoBehaviour
     public CameraControl myCameraControl;   
     public Text MessageText;              
     public GameObject TankPrefab;         
-    public TankManager[] Tanks;           
-
+    public TankManager[] Tanks;
+    public Transform ZoomPrefab;
 
     private int RoundNumber;              
     private WaitForSeconds StartWait;     
     private WaitForSeconds EndWait;       
     private TankManager RoundWinner;
-    private TankManager GameWinner;       
+    private TankManager GameWinner;
+    private Transform Zoom;
+    private bool IsCanceled = false;
 
 
     private void Start()
@@ -82,7 +84,9 @@ public class GameManager : MonoBehaviour
         myCameraControl.SetStartPositionAndSize();
         ++RoundNumber;
         MessageText.text = "ROUND " + RoundNumber;
-
+        SetPoisonArea();
+        IsCanceled = false;
+        ForceFinish = false;
         yield return StartWait;
     }
 
@@ -112,9 +116,48 @@ public class GameManager : MonoBehaviour
 
         string message = EndMessage();
         MessageText.text = message;
+        if (!IsCanceled)
+        {
+            CancelInvoke("ReduceRange");
+            
+        }
+        IsCanceled = true;
+        Destroy(Zoom.gameObject);
+        //Zoom.gameObject.SetActive(false);
         yield return EndWait;
     }
+    private void SetPoisonArea()
+    {
+        Zoom = Instantiate(ZoomPrefab);
+        int n;
+        n = Random.Range(0, 5);
+        if (n == 0) Zoom.transform.position = new Vector3(15, 0, 10);
+        else if (n == 1) Zoom.transform.position = new Vector3(35, 0, 30);
+        else if (n == 2) Zoom.transform.position = new Vector3(30, 0, -30);
+        else if (n == 3) Zoom.transform.position = new Vector3(-30, 0, 30);
+        else if (n == 4) Zoom.transform.position = new Vector3(-30, 0, -30);
 
+        //Zoom.transform.localScale = new Vector3(300, 40, 300);
+        InvokeRepeating("ReduceRange", .1f, 0.1f);
+
+        //Debug.Log("QQQ "+gameObject.GetComponent<Renderer>().material.color.a);
+        Zoom.GetComponent<Renderer>().material.color = new Color(0.1f, 0.6f, 0.8f, 0.1f);
+    }
+    private void ReduceRange()
+    {
+        Zoom.transform.localScale = Zoom.transform.localScale - Vector3.forward - Vector3.right;
+    }
+    static public bool ForceFinish = false;
+    void Update()
+    {
+        if (!IsCanceled && Zoom.localScale.x <= 0)
+        {
+            CancelInvoke("ReduceRange");
+            IsCanceled = true;
+            ForceFinish = true;
+        }
+           
+    }
 
     private bool OneTankLeft()
     {

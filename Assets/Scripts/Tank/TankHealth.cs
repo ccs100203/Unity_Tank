@@ -32,6 +32,8 @@ public class TankHealth : MonoBehaviour
         Dead = false;
 
         SetHealthUI();
+
+        //InvokeRepeating("Toxin", 1f, 1f);
     }
     
 
@@ -68,7 +70,7 @@ public class TankHealth : MonoBehaviour
     }
     void OnCollisionEnter(Collision c)
     {
-        Debug.Log(c.transform.name);
+        //Debug.Log(c.transform.name);
         if (c.transform.name == "Skeleton(Clone)")
         {
             TakeDamage(3f);
@@ -84,4 +86,43 @@ public class TankHealth : MonoBehaviour
             rb.AddForce(1000 * c.transform.forward);
         }
     }
+
+    /*void OnTriggerStay(Collider c)
+    {
+        if (c.gameObject.name == "Zoom(Clone)")
+        {
+            Debug.Log(c.gameObject.name + " Stay");
+            Inside = true;
+        }
+    }*/
+    void OnTriggerEnter(Collider c)
+    {
+        if (c.gameObject.name == "Zoom(Clone)")
+        {
+            Debug.Log(c.gameObject.name + " Enter");
+            //Inside = true;
+            CancelInvoke("Toxin");
+        }
+    }
+    void OnTriggerExit(Collider c)
+    {
+        if (c.gameObject.name == "Zoom(Clone)")
+        {
+            Debug.Log(c.gameObject.name + " Exit");
+            Inside = false;
+            InvokeRepeating("Toxin", 1f, 1f);
+        }
+    }
+
+    private void Toxin()
+    {
+     //   if (!Inside)
+            TakeDamage(3f);
+    }
+    void Update()
+    {
+        if (GameManager.ForceFinish) 
+            TakeDamage(0.1f);
+    }
+    private bool Inside = true;
 }

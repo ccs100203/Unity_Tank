@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class BossHealth : MonoBehaviour
 {
-    public float StartingHealth = 300f;
+    public float StartingHealth = 1000f;
     public Slider HealthBar;
     public Image FillImage;
     public Color FullHealthColor = Color.red;

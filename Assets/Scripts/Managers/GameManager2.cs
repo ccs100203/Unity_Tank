@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GameManager2 : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class GameManager2 : MonoBehaviour
     public Transform MonsPrefab;
     public Transform BossPrefab;
     public Transform BossGen;
+    static public List<Transform> MonsterList = new List<Transform>();
+    static public List<Transform> BossList = new List<Transform>();
 
 
     private int StageNumber = 1;
@@ -45,6 +48,24 @@ public class GameManager2 : MonoBehaviour
         if (GameObject.Find("Tower") == null || NoTankLeft())
         {
             SceneManager.LoadScene(3);
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            foreach(Transform target in MonsterList)
+            {
+                if(target != null)
+                    Destroy(target.gameObject);
+            }
+            MonsterList.Clear();   
+            foreach(Transform target in BossList)
+            {
+                if (target != null)
+                {
+                    target.gameObject.GetComponent<BossHealth>().TakeDamage(600f);
+                }
+                
+            }
+            
         }
     }
 
@@ -130,6 +151,7 @@ public class GameManager2 : MonoBehaviour
         for (int i = 0; i < 4; ++i)
         {
             Transform Mon = Instantiate(MonsPrefab);
+            MonsterList.Add(Mon);
             Mon.parent = MonsterGen[i].transform;
             Mon.transform.localPosition = Vector3.zero;
         }
@@ -144,6 +166,7 @@ public class GameManager2 : MonoBehaviour
     private void GenerateBoss()
     {
         Transform Mon = Instantiate(BossPrefab);
+        BossList.Add(Mon);
         Mon.parent = BossGen.transform;
         Mon.transform.localPosition = Vector3.zero;
     }

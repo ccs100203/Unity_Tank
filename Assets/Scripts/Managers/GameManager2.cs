@@ -8,7 +8,7 @@ public class GameManager2 : MonoBehaviour
 {
     public float StartDelay = 3f;
     public float EndDelay = 5f;
-    public CameraControl myCameraControl;
+    public CameraControl2 myCameraControl;
     public Text MessageText;
     public GameObject TankPrefab;
     public TankManager[] Tanks;
@@ -77,8 +77,8 @@ public class GameManager2 : MonoBehaviour
             for(int i=0; i<100; ++i)
             {
                 Debug.Log("Bomb");
-                float x = Random.Range(-100, 100);
-                float z = Random.Range(-100, 100);
+                float x = Random.Range(-80, 80);
+                float z = Random.Range(-80, 80);
                 Transform bomb = Instantiate(Bomb);
                 bomb.parent = tower.transform;
                 bomb.transform.localPosition = new Vector3(x, 0, z);
@@ -103,8 +103,18 @@ public class GameManager2 : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.RightControl))
         {
+            GameObject tower = GameObject.Find("Tower");
             if (skill2 <= 0)
                 return;
+            for (int i = 0; i < 100; ++i)
+            {
+                Debug.Log("Bomb");
+                float x = Random.Range(-60, 60);
+                float z = Random.Range(-60, 60);
+                Transform bomb = Instantiate(Bomb);
+                bomb.parent = tower.transform;
+                bomb.transform.localPosition = new Vector3(x, 0, z);
+            }
             foreach (Transform target in MonsterList)
             {
                 if (target != null)

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class TowerHealth : MonoBehaviour
 {
-    public float StartingHealth = 100f;
+    public float StartingHealth = 200f;
     public Slider HealthBar;
     public Image FillImage;
     public Color FullHealthColor = Color.red;

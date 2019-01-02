@@ -48,6 +48,7 @@ public class BossHealth : MonoBehaviour
     {
         // Play the effects for the death of the tank and deactivate it.
         Dead = true;
+        GameManager2.BossKills++;
         Destroy(gameObject);
     }
 }

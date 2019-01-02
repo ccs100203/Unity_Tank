@@ -18,6 +18,8 @@ public class GameManager2 : MonoBehaviour
     public Transform BossGen;
     static public List<Transform> MonsterList = new List<Transform>();
     static public List<Transform> BossList = new List<Transform>();
+    static public int MonsterKills = 0;
+    static public int BossKills = 0;
 
 
     private int StageNumber = 1;
@@ -27,6 +29,8 @@ public class GameManager2 : MonoBehaviour
     private int MonsterNum = 0;
     private bool Generating = false;
     private bool NextStage = false;
+    private int skill1 = 5;
+    private int skill2 = 5;
 
 
 
@@ -38,6 +42,8 @@ public class GameManager2 : MonoBehaviour
         SpawnAllTanks();
         SetCameraTargets();
         EnableTankControl();
+        MonsterKills = 0;
+        BossKills = 0;
         //ResetAllTanks();
         //myCameraControl.SetStartPositionAndSize();
         InvokeRepeating("GenerateBoss", 10f, 30f);
@@ -47,25 +53,64 @@ public class GameManager2 : MonoBehaviour
     {
         if (GameObject.Find("Tower") == null || NoTankLeft())
         {
+            CancelInvoke();
+            foreach (Transform target in MonsterList)
+            {
+                if (target != null)
+                    Destroy(target.gameObject);
+            }
+            MonsterList.Clear();
+            foreach (Transform target in BossList)
+            {
+                if (target != null)
+                    Destroy(target.gameObject);
+            }
+            BossList.Clear();
             SceneManager.LoadScene(3);
         }
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
+            if (skill1 <= 0)
+                return;
             foreach(Transform target in MonsterList)
             {
                 if(target != null)
+                {
                     Destroy(target.gameObject);
+                    MonsterKills++;
+                }
+                    
             }
             MonsterList.Clear();   
             foreach(Transform target in BossList)
             {
                 if (target != null)
-                {
-                    target.gameObject.GetComponent<BossHealth>().TakeDamage(600f);
-                }
-                
+                    target.gameObject.GetComponent<BossHealth>().TakeDamage(600f);       
             }
-            
+            skill1--;
+            GameObject.Find("SkillText1").GetComponent<Text>().text = "" + skill1;
+        }
+        if (Input.GetKeyUp(KeyCode.RightControl))
+        {
+            if (skill2 <= 0)
+                return;
+            foreach (Transform target in MonsterList)
+            {
+                if (target != null)
+                {
+                    Destroy(target.gameObject);
+                    MonsterKills++;
+                }
+
+            }
+            MonsterList.Clear();
+            foreach (Transform target in BossList)
+            {
+                if (target != null)
+                    target.gameObject.GetComponent<BossHealth>().TakeDamage(600f);
+            }
+            skill2--;
+            GameObject.Find("SkillText2").GetComponent<Text>().text = "" + skill2;
         }
     }
 

@@ -41,6 +41,8 @@ public class TankHealth : MonoBehaviour
     {
         // Adjust the tank's current health, update the UI based on the new health and check whether or not the tank is dead.
         CurrentHealth -= amount;
+        if (CurrentHealth > 100)
+            CurrentHealth = 100;
         SetHealthUI();
 
         if(CurrentHealth <= 0f && !Dead)
@@ -85,16 +87,18 @@ public class TankHealth : MonoBehaviour
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.AddForce(1000 * c.transform.forward);
         }
-    }
-
-    /*void OnTriggerStay(Collider c)
-    {
-        if (c.gameObject.name == "Zoom(Clone)")
+        if (c.transform.name == "Tool(Clone)")
         {
-            Debug.Log(c.gameObject.name + " Stay");
-            Inside = true;
+            TakeDamage(-30f);
+            Destroy(c.gameObject);
+            GameManager2.skill1 += 1;
+            Debug.Log(GameManager2.skill1);
+            GameManager2.skill2 += 1;
+            GameObject.Find("SkillText1").GetComponent<Text>().text = "" + GameManager2.skill1;
+            GameObject.Find("SkillText2").GetComponent<Text>().text = "" + GameManager2.skill2;
+
         }
-    }*/
+    }
     void OnTriggerEnter(Collider c)
     {
         if (c.gameObject.name == "Zoom(Clone)")

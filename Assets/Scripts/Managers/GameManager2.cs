@@ -13,14 +13,18 @@ public class GameManager2 : MonoBehaviour
     public GameObject TankPrefab;
     public TankManager[] Tanks;
     public Transform[] MonsterGen;
+    public Transform[] ToolGen;
     public Transform MonsPrefab;
     public Transform BossPrefab;
     public Transform BossGen;
     public Transform Bomb;
+    public Transform Tool;
     static public List<Transform> MonsterList = new List<Transform>();
     static public List<Transform> BossList = new List<Transform>();
     static public int MonsterKills = 0;
     static public int BossKills = 0;
+    static public int skill1 = 2;
+    static public int skill2 = 2;
 
 
     private int StageNumber = 1;
@@ -30,8 +34,8 @@ public class GameManager2 : MonoBehaviour
     private int MonsterNum = 0;
     private bool Generating = false;
     private bool NextStage = false;
-    private int skill1 = 5;
-    private int skill2 = 5;
+    private Transform tool1;
+    private Transform tool2;
 
 
 
@@ -52,6 +56,10 @@ public class GameManager2 : MonoBehaviour
     }
     private void Update()
     {
+        if (tool1 == null)
+            InvokeRepeating("Generatetool1", 60f, 30f);
+        if (tool2 == null)
+            InvokeRepeating("Generatetool2", 60f, 30f);
         if (GameObject.Find("Tower") == null || NoTankLeft())
         {
             CancelInvoke();
@@ -235,5 +243,19 @@ public class GameManager2 : MonoBehaviour
         BossList.Add(Mon);
         Mon.parent = BossGen.transform;
         Mon.transform.localPosition = Vector3.zero;
+    }
+    private void Generatetool1()
+    {
+        tool1 = Instantiate(Tool);
+        tool1.parent = ToolGen[0].transform;
+        tool1.transform.localPosition = new Vector3(0, 1, 0);
+        CancelInvoke("Generatetool1");
+    }
+    private void Generatetool2()
+    {
+        tool2 = Instantiate(Tool);
+        tool2.parent = ToolGen[1].transform;
+        tool2.transform.localPosition = new Vector3(0, 1, 0);
+        CancelInvoke("Generatetool2");
     }
 }

@@ -49,6 +49,13 @@ public class BossHealth : MonoBehaviour
         // Play the effects for the death of the tank and deactivate it.
         Dead = true;
         GameManager2.BossKills++;
+        float TowerHp = GameObject.Find("Tower").GetComponent<TowerHealth>().CurrentHealth;
+        TowerHp += 10;
+        if (TowerHp >= 200)
+            GameObject.Find("Tower").GetComponent<TowerHealth>().CurrentHealth = 200;
+        else
+            GameObject.Find("Tower").GetComponent<TowerHealth>().CurrentHealth = TowerHp;
+        GameObject.Find("Tower").GetComponent<TowerHealth>().SetHealthUI();
         Destroy(gameObject);
     }
 }

@@ -9,7 +9,7 @@ public class TowerHealth : MonoBehaviour
     public Color FullHealthColor = Color.red;
     public Color ZeroHealthColor = Color.yellow;
 
-    private float CurrentHealth;
+    public float CurrentHealth;
     private bool Dead;
 
 
@@ -36,7 +36,7 @@ public class TowerHealth : MonoBehaviour
     }
 
 
-    private void SetHealthUI()
+    public void SetHealthUI()
     {
         // Adjust the value and colour of the slider.
         HealthBar.value = CurrentHealth;

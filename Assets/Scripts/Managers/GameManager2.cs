@@ -16,6 +16,7 @@ public class GameManager2 : MonoBehaviour
     public Transform MonsPrefab;
     public Transform BossPrefab;
     public Transform BossGen;
+    public Transform Bomb;
     static public List<Transform> MonsterList = new List<Transform>();
     static public List<Transform> BossList = new List<Transform>();
     static public int MonsterKills = 0;
@@ -70,8 +71,18 @@ public class GameManager2 : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
+            GameObject tower = GameObject.Find("Tower");
             if (skill1 <= 0)
                 return;
+            for(int i=0; i<100; ++i)
+            {
+                Debug.Log("Bomb");
+                float x = Random.Range(-100, 100);
+                float z = Random.Range(-100, 100);
+                Transform bomb = Instantiate(Bomb);
+                bomb.parent = tower.transform;
+                bomb.transform.localPosition = new Vector3(x, 0, z);
+            }
             foreach(Transform target in MonsterList)
             {
                 if(target != null)

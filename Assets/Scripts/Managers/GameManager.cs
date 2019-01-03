@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
         else if (n == 4) Zoom.transform.position = new Vector3(-30, 0, -30);
 
         //Zoom.transform.localScale = new Vector3(300, 40, 300);
-        InvokeRepeating("ReduceRange", .1f, .1f);
+        InvokeRepeating("ReduceRange", .1f, 0.25f);
 
         //Debug.Log("QQQ "+gameObject.GetComponent<Renderer>().material.color.a);
         Zoom.GetComponent<Renderer>().material.color = new Color(0.1f, 0.6f, 0.8f, 0.1f);
